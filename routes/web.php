@@ -68,10 +68,11 @@ Route::resource('jobs', JobController::class)->middleware('auth');
 Route::PUT('jobs/approve/{id}', [JobController::class,'approve'])->middleware('auth');   
 Route::PUT('jobs/decline/{id}', [JobController::class,'decline'])->middleware('auth');   
 Route::get('/job_applications', [JobController::class,'application'])->middleware('auth');  
+Route::get('/jobs/edit/{id}', [JobController::class,'edit_app'])->name('jobs.edit')->middleware('auth');  
 Route::get('/job-add', [JobController::class,'add_job'])->middleware('auth');  
 Route::post('/job-save', [JobController::class,'save_job'])->middleware('auth');  
 //Invoice
 Route::PUT('/invoice/approve/{id}', [InvoiceController::class,'approve'])->middleware('auth'); 
-Route::post('/invoice/decline/{id}', [InvoiceController::class,'decline'])->middleware('auth'); 
+Route::post('/invoice/decline/{id}', [InvoiceController::class,'decline'])->middleware('`auth'); 
  
 

@@ -52,29 +52,25 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($users as $user)
-                                        <tr>
-                                        
-                                            
-                                            <td>{{$user->username}}</td>
-                                            <td>{{$user->email}}</td>
-                                            <td>{{App\Models\JobApply::where('user_id',$user->id)->get()->count()}}</td>
-                                            
-                                          
-                                            <td>{{ date('m-d-Y',strtotime($user->created_at)) }}</td>
-                                            <td>{{ date('m-d-Y',strtotime($user->updated_at)) }}</td>
-                                           
-                                           
-                                            <td class="d-flex">
-                                               <a href="{{url('users').'/'.$user->id}}"><button type="button" class="btn btn-primary">View</button></a> &nbsp
-                                                <form action="/users/{{$user->id}}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                                </form>
-                                             </td>
-                                           </tr>
-                                        @endforeach
+                                        @if(count($users))
+                                            @foreach($users as $user)
+                                                <tr>                                            
+                                                    <td>{{$user->username}}</td>
+                                                    <td>{{$user->email}}</td>
+                                                    <td>{{App\Models\JobApply::where('user_id',$user->id)->get()->count()}}</td>
+                                                    <td>{{ date('m-d-Y',strtotime($user->created_at)) }}</td>
+                                                    <td>{{ date('m-d-Y',strtotime($user->updated_at)) }}</td>
+                                                    <td class="d-flex align-items-center">
+                                                       <a href="{{url('users').'/'.$user->id}}"><button type="button" class="btn btn-sm btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></button></a> &nbsp
+                                                        <form action="/users/{{$user->id}}" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true" style="font-family: 'Font Awesome 5 Pro';"></i></button>
+                                                        </form>
+                                                    </td>
+                                               </tr>
+                                            @endforeach
+                                        @endif
                                     </tbody>
                                 </table>
                                 </div>

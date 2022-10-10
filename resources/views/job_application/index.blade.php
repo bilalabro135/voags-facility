@@ -69,11 +69,11 @@
                                             <td>{{ date('m-d-Y',strtotime($job->updated_at)) }}</td>
                                            
                                             <td class="d-flex">
-                                                <button type="button" class="edit_button btn btn-primary mr-2" data-id="{{$job->id}}">Edit</a>
+                                                <button type="button" class="edit_button btn btn-sm btn-primary mr-1" data-id="{{$job->id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                                 <form action="/jobs/{{$job->id}}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                    <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true" style="font-family: 'Font Awesome 5 Pro';"></i></button>
                                                 </form>
                                              </td>
                                            </tr>
@@ -164,14 +164,14 @@
       </div>
     </div>
   </div>
-  <div class="modal fade" id="exampleModal03" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade my-cust-modal" id="exampleModal03" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
          <div class="">
             <h3 class="modal-title justify-content-center" id="exampleModalLabel">Edit Job Application</h3>
          </div>
-          <button class="btn" data-bs-dismiss="modal"><i class="fas fa-times-circle"></i></button>
+          <button class="btn close-tab-btn" data-bs-dismiss="modal"><i class="fas fa-times-circle"></i></button>
         </div>
         <div class="modal-body">
             <div class="row">
@@ -223,18 +223,22 @@
       </div>
     </div>
   </div>
- 
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script>
     $(document).ready(function(){
         $('.edit_button').on('click',function(){
             var id = $(this).data('id');
+            var url = "{{ route('jobs.edit', ':id') }}";
+            url = url.replace(':id', id);
             //alert(id);
+            console.log(url);
             $.ajax({
                 type:'GET',
-                url:'/jobs/'+id+'/edit',
+                url:url,
                
                 success:function(data){
-                    $('#exampleModal03').modal('show');
+                    $('#exampleModal03').fadeIn();
+                    $('#exampleModal03').addClass('show');
                     var url='/jobs/'+id;
                     $('#update_job').attr('action',url);
                    // console.log(data.title);
@@ -248,6 +252,10 @@
                 }
             });
         });
+         $('.close-tab-btn').click(function(){
+          $('#exampleModal03').fadeOut();
+          $('#exampleModal03').removeClass('show');
+         });
     });
 </script>
 @endsection

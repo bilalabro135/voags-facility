@@ -65,12 +65,15 @@
                                             <td>{{$item->status}}</td>
                                             <td>{{$item->amount}}</td>
                                             <td>
-                                              @if ($item->status=='Approved' || $item->status=='Declined')
-                                                <button disabled class=" btn btn-warning" style="padding: 3px 5px;">Approved</button>
-                                                <button disabled  style="padding: 3px 5px;" class="btn btn-danger">Declined</button>
+                                              @if ($item->status=='Approved')
+                                                <button disabled class=" btn btn-success" style="padding: 3px 5px;">Approved <i class="fa fa-check" aria-hidden="true"></i></button>
+                                                <button disabled data-bs-toggle="modal" data-bs-target="#exampleModal02" style="padding: 3px 5px;" data-id="{{$item->id}}" class="btn btn-danger decBtn">Decline</button>
+                                              @elseif($item->status=='Declined')
+                                                <button disabled data-id="{{$item->id}}" class="app_button btn btn-success" style="padding: 3px 5px;">Approve</button> 
+                                                <button disabled  style="padding: 3px 5px;" class="btn btn-danger"><i class="fa fa-ban" aria-hidden="true"></i> Declined</button>
                                               @else
                                                 <button data-id="{{$item->id}}" class="app_button btn btn-success" style="padding: 3px 5px;">Approve</button> 
-                                                <button  data-bs-toggle="modal" data-bs-target="#exampleModal02" style="padding: 3px 5px;" data-id="{{$item->id}}" class="btn btn-danger decBtn">Decline</button>
+                                                <button data-bs-toggle="modal" data-bs-target="#exampleModal02" style="padding: 3px 5px;" data-id="{{$item->id}}" class="btn btn-danger decBtn">Decline</button>
                                               @endif
                                           </td>
                                         </tr>
@@ -90,7 +93,7 @@
         </div>
     </div>
 </div>
-  {{-- <div class="row mt-2">
+  <!-- {{-- <div class="row mt-2">
     <div class="col-12">
         <div class="card">
             <div class="card-content">
@@ -185,7 +188,7 @@
             </div>
         </div>
     </div>
-</div> --}}
+</div> --}} -->
   <div class="row mt-2">
     <div class="col-12">
         <div class="card">
@@ -211,30 +214,28 @@
     </div>
     <!-- ////////////////////////////////////////////////////////////////////////////-->
   <!-- Modal -->
-  <div class="modal fade" id="exampleModal02" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade my-cust-modal" id="exampleModal02" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
          <div class="">
             <h3 class="modal-title justify-content-center" id="exampleModalLabel">Do You Want to Deny?</h3>
          </div>
-          <button class="btn" data-bs-dismiss="modal"><i class="fas fa-times-circle"></i></button>
+          <button class="btn close-tab-btn" data-bs-dismiss="modal"><i class="fas fa-times-circle"></i></button>
         </div>
         <div class="modal-body">
             <div class="row">
                 <div class="col-md-12">
-                    
-                          <form action="/invoice/decline/{{$item->id}}" method="POST">
-                            @csrf
-                            <input type="hidden" name="invoice_id" id="invoice_id">
-                            <div class="form-group row">
-                              <div class="mt-1 d-flex justify-content-center">
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>&nbsp;&nbsp;
-                                <button type="submit" class="btn btn-primary">Yes</button>
-                              </div>
-                            </div>
-                          </form>
-                       
+                  <form action="/invoice/decline/{{$item->id}}" class="dec-form" method="POST">
+                    @csrf
+                    <input type="hidden" value="Declined" name="status" id="invoice_id">
+                    <div class="form-group row">
+                      <div class="mt-1 d-flex justify-content-center">
+                        <button type="button" class="btn btn-danger close-tab-btn" data-bs-dismiss="modal">No</button>&nbsp;&nbsp;
+                        <button type="submit" class="btn btn-primary">Yes</button>
+                      </div>
+                    </div>
+                  </form>
                 </div>
             </div>
         </div>
@@ -420,10 +421,15 @@
             });
         });
          $('.decBtn').click(function(){
+          $('#exampleModal02').fadeIn();
+          $('#exampleModal02').addClass('show');
            var id=$(this).attr('data-id');
                $('#invoice_id').val(id);
-           
         });
+         $('.close-tab-btn').click(function(){
+          $('#exampleModal02').fadeOut();
+          $('#exampleModal02').removeClass('show');
+         });
       });
     </script>
 @endsection

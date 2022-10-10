@@ -452,3 +452,9 @@ textarea,select{
 	border-radius: 20px;
 	padding: 2px 5px;
 }
+.my-cust-modal{
+	background: #00000052;
+}
+.app-content .content-body .card{
+	margin-top: 70px;
+}

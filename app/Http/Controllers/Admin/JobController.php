@@ -173,6 +173,10 @@ class JobController extends Controller
         $services=Service::all();
         return view('job_application.add_job',compact('services'));
     }
+
+    public function edit_app(){
+        
+    }
     
     public function save_job(Request $request)
     {
