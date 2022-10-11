@@ -254,6 +254,12 @@ class JobController extends Controller
         return redirect()->back()->with($notification);
         
     }
-    
-    
+
+    public function view_job($id)
+    {
+        $job        = Job::where('id',$id)->first();
+        $job_apply  = JobApply::where('job_id',$id)->first();
+        $user       = User::where('id',$job_apply->user_id)->first();
+        return view('job_application.show',compact('job','job_apply','user'));
+    }
 }

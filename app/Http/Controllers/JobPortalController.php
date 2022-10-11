@@ -35,6 +35,10 @@ class JobPortalController extends Controller
     
     public function job_apply(Request $request)
     {
+        $validatedData = $request->validate([
+            'job_id' => ['required', 'numeric'],
+            'resolution' => ['required']
+        ]);
         //dd($request->all());
       $job_id=$request->job_id;
       $invoice_name=$request->name;
@@ -85,7 +89,7 @@ class JobPortalController extends Controller
     public function job_decline(Request $request)
     {
         $service_decline=new JobDecline();
-        $service_decline->service_id=$request->service_id;
+        $service_decline->job_id=$request->job_id;
         $service_decline->user_id=auth()->user()->id;
         $service_decline->save();
         $notification = array(

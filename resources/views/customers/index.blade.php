@@ -61,7 +61,7 @@
                                                     <td>{{ date('m-d-Y',strtotime($user->created_at)) }}</td>
                                                     <td>{{ date('m-d-Y',strtotime($user->updated_at)) }}</td>
                                                     <td class="d-flex align-items-center">
-                                                       <a href="{{url('users').'/'.$user->id}}"><button type="button" class="btn btn-sm btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></button></a> &nbsp
+                                                       <a href="{{url('users').'/'.$user->id}}"><button type="button" class="btn btn-sm btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></button></a> &nbsp;
                                                         <form action="/users/{{$user->id}}" method="POST">
                                                             @csrf
                                                             @method('DELETE')

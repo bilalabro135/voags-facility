@@ -69,7 +69,12 @@
                                             <td>{{ date('m-d-Y',strtotime($job->updated_at)) }}</td>
                                            
                                             <td class="d-flex">
-                                                <button type="button" class="edit_button btn btn-sm btn-primary mr-1" data-id="{{$job->id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                                <a href="{{url('job').'/'.$job->id}}" class="btn btn-sm btn-primary mr-1">
+                                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                                </a>
+                                                <button type="button" class="edit_button btn btn-sm btn-primary mr-1" data-id="{{$job->id}}">
+                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                </button>
                                                 <form action="/jobs/{{$job->id}}" method="POST">
                                                     @csrf
                                                     @method('DELETE')

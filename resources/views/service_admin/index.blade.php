@@ -70,11 +70,11 @@
                                             <td>{{ date('m-d-Y',strtotime($service->updated_at)) }}</td>
                                            
                                             <td class="d-flex">
-                                                <a href="{{url('services').'/'.$service->id}}"><button type="button" class=" btn btn-primary mr-2">Edit</button></a>
+                                                <a href="{{url('services').'/'.$service->id}}"><button type="button" class=" btn btn-sm btn-primary mr-2"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
                                                 <form action="/services/{{$service->id}}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                    <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true" style="font-family: 'Font Awesome 5 Pro';"></i></button>
                                                 </form>
                                             </td>
                                         </tr>

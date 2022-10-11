@@ -19,6 +19,9 @@
 
          <div class="row mt-3">
     <div class="col-12">
+        @if($errors->any())
+            <div class="text-center alert alert-danger">{{ implode('', $errors->all(':message')) }}</div>
+        @endif
         <div class="card">
             <div class="card-content">
                 
@@ -195,7 +198,7 @@
                         <p>This rate is for 1 regular technicion and 0 helper technicians. Any additional technicians must be approved.</p>
                     </div>
                     <div class="mt-1">
-                        <input type="checkbox" name="agree" value="yes"> <label>I agree that above pricing is final, and any work of expenditure beyond the amount shown is not authorized.</l>
+                        <input type="checkbox" name="agree" value="yes"> <label>I agree that above pricing is final, and any work of expenditure beyond the amount shown is not authorized.</label>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -208,34 +211,34 @@
                             @if($job->job_requirement!=null)
                                 <div class="mt-2">
                                     <label style="font-weight: bold;">Job Requirements:</label><br>
-                                    <input type="checkbox" name="requirements" value="yes"> <label>{{$job->job_requirement}}</l>  
+                                    <input type="checkbox" name="requirements" value="yes"> <label>{{$job->job_requirement}}</label>  
                                 </div>
-                            @endif
-                            @foreach($job_disp  as $item)
+                                @endif
+                                @foreach($job_disp  as $item)
                             
                                 <div class="mt-2">
                                     <label style="font-weight: bold;">{{$item->title}}:</label><br>
-                                   <p>{{$item->description}}</p>
-                                <div class="mt-1">
-                                    <input type="checkbox" name="understand" value="yes"> <label>I understand the above recommendations</label>
+                                    <p>{{$item->description}}</p>
+                                    <div class="mt-1">
+                                        <input type="checkbox" name="understand" value="yes"> <label>I understand the above recommendations</label>
+                                    </div>
+                                    
+                                @endforeach
+                                @if($job->$job_imgs!=null)
+                                <div class="mt-2">
+                                    <label style="font-weight: bold;">Photos</label><br>
+                                       @foreach($job_imgs  as $item)
+                                     <img src="{{asset('images')}}/{{$item->image}}" width="200px" height="200px" alt="">&nbsp&nbsp
+                                       @endforeach
                                 </div>
-                                
-                            @endforeach
-                          @if($job->$job_imgs!=null)
-                            <div class="mt-2">
-                                <label style="font-weight: bold;">Photos</label><br>
-                                   @foreach($job_imgs  as $item)
-                                 <img src="{{asset('images')}}/{{$item->image}}" width="200px" height="200px" alt="">&nbsp&nbsp
-                                   @endforeach
-                            </div>
-                            @endif
-                            <div class="mt-3 d-flex justify-content-center">
-                                <button type="submit" class="btn btn-primary">Apply</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <button type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal01" data-id="{{$job->id}}" class="btn btn-danger jobBtn">Decline</button>
+                                @endif
+                                <div class="mt-3 d-flex justify-content-center">
+                                    <button type="submit" class="btn btn-primary">Apply</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <button type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal01" data-id="{{$job->id}}" class="btn btn-danger jobBtn">Decline</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                  </form>
+                    </form>
                 </div>
             </div>
         </div>
@@ -285,14 +288,14 @@
   </div>
   <script>
     $(document).ready(function(){
-        var quantity=$('#quantity').val();
-        var cost=$('#cost').val();
-        var total=quantity*cost;
+        var quantity = $('#quantity').val();
+        var cost     = $('#cost').val();
+        var total    = quantity*cost;
         $('#total').val(total);
         $('#final_total').text('$'+total);
 
         $('.jobBtn').click(function(){
-           var id=$(this).attr('data-id');
+           var id = $(this).attr('data-id');
                $('#job_id').val(id);
            
         });

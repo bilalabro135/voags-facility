@@ -59,8 +59,8 @@
                                             <td>{{$order->date}}</td>
                                             <td>{{$order->phone_number}}</td>
                                             <td>
-                                                <a href="{{url('show-purchase_order/'.$order->id)}}"><button type="button" class="btn btn-primary"  >View</button></a>
-                                                <button type="button" class="btn btn-danger" onclick="del({{$order->id}})" >Delete</button>
+                                                <a href="{{url('show-purchase_order/'.$order->id)}}"><button type="button" class="btn btn-sm btn-primary"  ><i class="fa fa-eye" aria-hidden="true"></i></button></a>
+                                                <button type="button" class="btn btn-sm btn-danger" onclick="del({{$order->id}})" ><i class="fa fa-trash" aria-hidden="true" style="font-family: 'Font Awesome 5 Pro';"></i></button>
                                                 
                                             </td>
                                         </tr>

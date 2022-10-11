@@ -30,7 +30,7 @@
                             <div class="mt-2">
                                 <div class="d-flex justify-content-end">
                                     
-                                     <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal02" class="btn btn-primary">Add New Job</button>
+                                     <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal02" class="btn btn-primary add_new_job">Add New Job</button>
                                 </div>
                             </div>
                            
@@ -69,7 +69,7 @@
                                            
                                             <td class="d-flex">
                                                 
-                                                  <button type="button"  class="approve_button btn btn-primary mr-2" data-id="{{$job->id}}">Approve</a>
+                                                  <button type="button"  class="approve_button btn btn-primary mr-2" data-id="{{$job->id}}">Approve</button>
                                                   
                                                
                                                 <form action="/jobs/decline/{{$job->id}}" method="POST">
@@ -101,64 +101,64 @@
       </div>
     </div>
   <!-- Modal -->
-  <div class="modal fade" id="exampleModal02" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade my-cust-modal" id="exampleModal02" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
          <div class="">
             <h3 class="modal-title justify-content-center" id="exampleModalLabel">Add New Service</h3>
          </div>
-          <button class="btn" data-bs-dismiss="modal"><i class="fas fa-times-circle"></i></button>
+          <button class="btn close-tab-btn" data-bs-dismiss="modal"><i class="fas fa-times-circle"></i></button>
         </div>
         <div class="modal-body">
             <div class="row">
                 <div class="col-md-12">
-                  <form action="{{url('/jobs')}}" method="post">
-                                    @csrf
-                                    <div class="form-group">
-                                        <label for="title">Title</label>
-                                        <input type="text" class="form-control" id="title" value="{{old('title')}}" name="title" placeholder="Web Developer">
-                                         @error('title')
-                                        <span class="text-danger">{{$message}}</span>
-                                         @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="job_type">Job Type</label>
-                                        <input type="text" class="form-control" id="job_type" value="{{old('job_type')}}" name="job_type" placeholder="Full Time">
-                                         @error('job_type')
-                                        <span class="text-danger">{{$message}}</span>
-                                         @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="job_location">Job Location</label>
-                                        <input type="text" class="form-control" id="job_location" value="{{old('job_location')}}" name="job_location" placeholder="Service Rate">
-                                         @error('job_location')
-                                        <span class="text-danger">{{$message}}</span>
-                                         @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="description">Description</label>
-                                        <input type="text" class="form-control" id="description" value="{{old('description')}}" name="description" placeholder="Service Rate">
-                                         @error('description')
-                                        <span class="text-danger">{{$message}}</span>
-                                         @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="service_id">Service</label>
-                                        <select class="form-control" id="service_id" name="service_id">
-                                            <option value="">Select Service </option>
-                                            @foreach($services as $service)
-                                            <option value="{{$service->id}}">{{$service->name}}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('service_id')
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                    </div>
-                                    <div class="mt-1">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </div>
-                                </form>
+                    <form action="{{url('/jobs')}}" method="post">
+                        @csrf
+                        <div class="form-group">
+                            <label for="title">Title</label>
+                            <input type="text" class="form-control" id="title" value="{{old('title')}}" name="title" placeholder="Web Developer">
+                             @error('title')
+                            <span class="text-danger">{{$message}}</span>
+                             @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="job_type">Job Type</label>
+                            <input type="text" class="form-control" id="job_type" value="{{old('job_type')}}" name="job_type" placeholder="Full Time">
+                             @error('job_type')
+                            <span class="text-danger">{{$message}}</span>
+                             @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="job_location">Job Location</label>
+                            <input type="text" class="form-control" id="job_location" value="{{old('job_location')}}" name="job_location" placeholder="Service Rate">
+                             @error('job_location')
+                            <span class="text-danger">{{$message}}</span>
+                             @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <input type="text" class="form-control" id="description" value="{{old('description')}}" name="description" placeholder="Service Rate">
+                             @error('description')
+                            <span class="text-danger">{{$message}}</span>
+                             @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="service_id">Service</label>
+                            <select class="form-control" id="service_id" name="service_id">
+                                <option value="">Select Service </option>
+                                @foreach($services as $service)
+                                <option value="{{$service->id}}">{{$service->name}}</option>
+                                @endforeach
+                            </select>
+                            @error('service_id')
+                            <span class="text-danger">{{$message}}</span>
+                            @enderror
+                        </div>
+                        <div class="mt-1">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -169,7 +169,7 @@
       </div>
     </div>
   </div>
- 
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script>
     $(document).ready(function(){
         $('.approve_button').on('click',function(){
@@ -187,6 +187,14 @@
                     location.reload();
                 }
             });
+        });
+        $('.add_new_job').click(function(){
+            $('#exampleModal02').fadeIn();
+            $('#exampleModal02').addClass('show');
+        });
+        $('.close-tab-btn').click(function(){
+            $('#exampleModal02').fadeOut();
+            $('#exampleModal02').removeClass('show');
         });
     });
 </script>
